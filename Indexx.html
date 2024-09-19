@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive To-Do List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://4kwallpapers.com/images/walls/thumbs_3t/12596.jpg'); /* Example wooden background */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 500px;
+            max-width: 90%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .scroll {
+            background-image: url('https://i.pinimg.com/564x/a9/c2/29/a9c2299c4ae1455284110f71a5e670d2.jpg'); /* Example scroll background */
+            background-size: cover;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            list-style: none;
+            min-height: 300px;
+        }
+
+        .scroll li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .scroll li:last-child {
+            border-bottom: none;
+        }
+
+        input[type="checkbox"] {
+            transform: scale(1.5);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .empty {
+            color: gray;
+            font-style: italic;
+        }
+
+        .nav-bar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 18px;
+        }
+
+        .nav-bar a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <a href="#">Home</a>
+        <a href="#">Contacts</a>
+        <a href="#">Sign in</a>
+    </div>
+
+    <div class="container">
+        <h1>To Do List</h1>
+        
+        <input type="text" id="taskInput" placeholder="Enter a new task...">
+        <button onclick="addTask()">Add Task</button>
+        
+        <ul class="scroll" id="taskList">
+            <!-- ToDo items will be dynamically added here -->
+        </ul>
+    </div>
+
+    <script>
+        // Function to add a new task
+        function addTask() {
+            let taskInput = document.getElementById('taskInput').value;
+            if (taskInput === '') {
+                alert('Please enter a task');
+                return;
+            }
+
+            let taskList = document.getElementById('taskList');
+            
+            // Create a new list item
+            let newTask = document.createElement('li');
+            newTask.innerHTML = `<span>${taskInput}</span><input type="checkbox" onclick="markTaskComplete(this)">`;
+            
+            // Append the new task to the list
+            taskList.appendChild(newTask);
+            
+            // Clear the input field
+            document.getElementById('taskInput').value = '';
+        }
+
+        // Function to mark task as complete
+        function markTaskComplete(checkbox) {
+            if (checkbox.checked) {
+                checkbox.parentElement.style.textDecoration = "line-through";
+            } else {
+                checkbox.parentElement.style.textDecoration = "none";
+            }
+        }
+    </script>
+</body>
+</html>
